@@ -12,12 +12,13 @@
         $age = $record['age'];
         $username = $record['username'];
         $address = $record['address'];
-        $id = $record['id'];
-
+        $image = $record['image'];
+        
     }
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>How to create, update, delete database records: PHP and MySQL</title>
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -33,6 +34,7 @@
                 <th>Age</th>
                 <th>Username</th>
                 <th>Address</th>
+                <th>Image</th>
                 <th colspan='2'>Action</th>
             </tr>
         </thead>
@@ -43,6 +45,7 @@
                 <td><?php echo $row['age']; ?></td>
                 <td><?php echo $row['username']; ?></td>
                 <td><?php echo $row['address']; ?></td>
+                <td><img src="<?php echo "images/".$row['image']; ?>" width="40" height="40"></td>
                 <td>
                     <a href="index.php?edit=<?php echo $row['id'] ?>" class="edit_btn">Edit</a>
                 </td>
@@ -54,7 +57,7 @@
         </tbody>
     </table>
 
-    <form method="post" action="server.php">
+    <form method="post" action="server.php" enctype="multipart/form-data">
 
         <input type="hidden" name="id" value="<?php echo $id; ?>">
         
@@ -73,6 +76,10 @@
         <div class="input-group">
             <label>Address</label>
             <input type="text" name= "address" value="<?php echo $address; ?>">
+        </div>
+        <div class="input-group">
+            <label>Upload portrait</label>
+            <input type="file" name="file" value="<?php echo "images/".$image; ?>">
         </div>
         <div class="input-group">
             <?php if($update == true): ?>
